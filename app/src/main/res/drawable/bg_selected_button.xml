@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state: darker background with shadow -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- Shadow layer -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#33000000"/> <!-- semi-transparent shadow -->
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+            <!-- Main background layer (darker shade when pressed) -->
+            <item android:top="4dp">
+                <shape android:shape="oval">
+                    <solid android:color="#2A2020"/> <!-- slightly darker than #3C2F2F -->
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <!-- Disabled state: gray background with shadow -->
+    <item android:state_enabled="false">
+        <layer-list>
+            <!-- Shadow layer -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#22000000"/>
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+            <!-- Disabled background layer -->
+            <item android:top="2dp">
+                <shape android:shape="oval">
+                    <solid android:color="#FFB0B0B0"/>
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <!-- Default state: #3C2F2F background with shadow -->
+    <item>
+        <layer-list>
+            <!-- Shadow layer -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#22000000"/>
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+            <!-- Main background layer -->
+            <item android:top="2dp">
+                <shape android:shape="oval">
+                    <solid android:color="@color/default_primary_tab"/>
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

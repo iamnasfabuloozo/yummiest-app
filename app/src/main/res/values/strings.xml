@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Yummiest</string>
+    <string name="food_title_text">Cheeseburger Wendys Burger</string>
+    <string name="food_rate_text">rate</string>
+    <string name="food_order_quantity">quantity</string>
+    <string name="food_desc_text">The Cheeseburger Wendys Burger is a classic fast food burger that packs a punch of flavor in every bite. Made with a juicy beef patty cooked to perfection, it\'s topped with melted American cheese, crispy lettuce, ripe tomato, and crunchy pickles.</string>
+
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+</resources>

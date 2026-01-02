@@ -10,12 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.nativeappwips.yummiest.foodfragments.FoodMenuListFragment
 import com.nativeappwips.yummiest.mainfragments.FoodMenuFragment
 import com.nativeappwips.yummiest.mainfragments.OrderHistoryFragment
 import com.nativeappwips.yummiest.mainfragments.ProfileFragment
@@ -114,18 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun replacePageWithDetail() {
-
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.addToBackStack(null) // Add this line to enable back navigation
-        transaction.replace(appPagerAdapter.getItemId(0).toInt(), FoodMenuListFragment()).commit()
+    fun setPagerSwipe(enabled: Boolean) {
+        viewPager.isUserInputEnabled = enabled
     }
-
-//    private fun showFoodMenuFromFoodMenuType(foodType: String) {
-//        // This function can be used to refresh or show the food menu if needed
-//        Log.d("JONAS", "Showing food menu $foodType")
-//        parentFragmentManager.beginTransaction().replace(R.id.fragment_container, FoodMenuFromFoodMenuTypeFragment.newInstance(foodType))
-//                .addToBackStack(null)
-//                .commit()
-//    }
 }

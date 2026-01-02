@@ -14,6 +14,7 @@ class MainFoodMenuFragment: Fragment(R.layout.fragment_food_grid) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (parentFragment as? FoodMenuFragment)?.setPagerSwipe(true)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvFood)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)

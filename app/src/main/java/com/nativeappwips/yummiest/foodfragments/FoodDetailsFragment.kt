@@ -1,25 +1,23 @@
 package com.nativeappwips.yummiest.foodfragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nativeappwips.yummiest.FoodItem
 import com.nativeappwips.yummiest.R
 import com.nativeappwips.yummiest.mainfragments.FoodMenuFragment
 
-class FoodMenuListFragment : Fragment(R.layout.fragment_food_menu) {
+class FoodDetailsFragment: Fragment(R.layout.fragment_food_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBackPressed()
         (parentFragment as? FoodMenuFragment)?.setPagerSwipe(false)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvFood)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rvAddOns)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val items = listOf(
                 FoodItem(R.drawable.ic_burger, "Burger", "Wendy's Burger", "4.8", "₱ 100"),
                 FoodItem(R.drawable.ic_burger, "Burger", "Veggie Burger", "5.0", "₱ 100"),
@@ -32,20 +30,9 @@ class FoodMenuListFragment : Fragment(R.layout.fragment_food_menu) {
                 FoodItem(R.drawable.ic_burger, "Burger", "Veggie Burger", "3.8", "₱ 100")
         )
 
-        val foodMenuAdapter = FoodMenuListAdapter(items, R.layout.item_food_grid)
+        val foodMenuAdapter = FoodMenuListAdapter(items, R.layout.item_food_grid_2)
         recyclerView.adapter = foodMenuAdapter
 
-        foodMenuAdapter.setOnItemClickListener { position ->
-            Log.d("JONAS", "Item clicked at position: $position")
-            // Handle the item click here, e.g., navigate to a detail page
-            (parentFragment as? FoodMenuFragment)?.showFoodItemDetails()
-        }
-
-        foodMenuAdapter.setOnItemAddToCartListener { position, item ->
-            Log.d("JONAS", "Item added to cart: ${item.title} at position: $position")
-            // Handle the add to cart action here
-            // For example, update the cart in the ViewModel or navigate to a cart page
-        }
     }
 
     private fun onBackPressed() {
@@ -56,4 +43,3 @@ class FoodMenuListFragment : Fragment(R.layout.fragment_food_menu) {
         }
     }
 }
-

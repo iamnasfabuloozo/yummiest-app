@@ -1,8 +1,10 @@
 package com.nativeappwips.yummiest.foodfragments
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +14,7 @@ import com.nativeappwips.yummiest.OnItemAddToCartListener
 import com.nativeappwips.yummiest.R
 import com.nativeappwips.yummiest.utils.loadImage
 
-class FoodMenuListAdapter(private val items: List<FoodItem>) : RecyclerView.Adapter<FoodMenuListAdapter.ViewHolder>() {
+class FoodMenuListAdapter(private val items: List<FoodItem>, val res: Int) : RecyclerView.Adapter<FoodMenuListAdapter.ViewHolder>() {
 
     private var onFoodItemViewListener: OnFoodItemViewListener? = null
     private var onItemAddToCartListener: OnItemAddToCartListener? = null
@@ -23,27 +25,37 @@ class FoodMenuListAdapter(private val items: List<FoodItem>) : RecyclerView.Adap
         val titleText: TextView = itemView.findViewById(R.id.tvFoodName)
         val ratingText: TextView = itemView.findViewById(R.id.tvRating)
         val imageViewAddToCart: ImageView = itemView.findViewById(R.id.imageViewAddToCart)
-        val btnOrders: TextView = itemView.findViewById(R.id.btnOrders)
+        val frameLayoutAddToCart: FrameLayout = itemView.findViewById(R.id.frameLayoutAddToCart)
 
         init {
             itemView.setOnClickListener {
                 onFoodItemViewListener?.onFoodItemView(adapterPosition)
             }
 
+            frameLayoutAddToCart.setOnClickListener {
+                Log.d("JONAS", "Item added to cart via frameLayoutAddToCart")
+                onItemAddToCartListener?.onItemAddToCart(adapterPosition, items[adapterPosition])
+            }
+
             imageViewAddToCart.setOnClickListener {
+                Log.d("JONAS", "Item added to cart via imageViewAddToCart")
                 onItemAddToCartListener?.onItemAddToCart(adapterPosition, items[adapterPosition])
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food_grid, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(res, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
+        if (item.imageResId == null) {
+            Log.d("JONAS", "Image resource ID is null for item at position $position, using placeholder.")
+            holder.ivFood.scaleType = ImageView.ScaleType.CENTER_CROP
+        }
         loadImage(holder.itemView.context,
                 "",
                 item.imageResId,
